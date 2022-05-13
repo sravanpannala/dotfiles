@@ -1,0 +1,10 @@
+#!/bin/bash
+read -p "Do you want to install AUR packages (y/n) " yn
+
+case $yn in
+	y )	yay -S - < pkglist_aur;;
+	n ) exit 1;;
+	* ) echo invalid response;
+		exit 1;;
+esac
+

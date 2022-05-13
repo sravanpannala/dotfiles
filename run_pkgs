@@ -2,8 +2,8 @@
 read -p "If you want a full package install choose yes, otherwise choose no? (y/n) " yn
 
 case $yn in
-	y ) yay -S --needed - < pkglist_full;;
-	n ) yay -S --needed - < pkglist_min;;
+	y ) sudo pacman -S --noconfirm --needed - < pkglist_full;;
+	n ) sudo pacman -S --noconfirm --needed - < pkglist_min;;
 	* ) echo invalid response;
 		exit 1;;
 esac
