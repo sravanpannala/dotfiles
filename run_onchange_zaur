@@ -3,8 +3,8 @@ read -p "Do you want to install AUR packages (y/n) " yn
 
 pkglist_aur="btrfs-assistant-git
 pacseek
-btrfsmaintenance
-"
+btrfsmaintenance"
+
 echo -e "$pkglist_aur" > pkglist_aur
 
 case $yn in
@@ -12,3 +12,4 @@ case $yn in
 	* ) echo continue;;
 esac
 
+rm -rf pkglist_aur
