@@ -1,0 +1,58 @@
+#!/bin/bash
+
+read -p "If you want a full package install choose yes, otherwise choose no? (y/n) " yn
+
+pkglist_full="micro
+barrier
+btop
+bat
+ncdu
+duf
+lazygit
+ranger
+ripgrep
+neovim
+xclip
+fd
+exa
+ncdu
+fzf
+iotop
+stress
+conky
+plank
+cpupower
+expac
+baobab
+gparted
+kvantum-qt5
+qt5ct
+syncthing
+dfc
+snapper
+arch-install-scripts
+byobu
+"
+
+pkglist_min="micro
+barrier
+btop
+bat
+ncdu
+duf
+lazygit
+ranger
+ripgrep
+neovim
+xclip
+fd
+"
+
+echo -e "$pkglist_full" > pkglist_full
+echo -e "$pkglist_min" > pkglist_min
+
+case $yn in
+	y ) sudo pacman -S --noconfirm --needed - < pkglist_full;;
+	n ) sudo pacman -S --noconfirm --needed - < pkglist_min;;
+	* ) echo continue;;
+esac
