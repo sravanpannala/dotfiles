@@ -1,0 +1,73 @@
+# My Aliases
+alias vi="nvim"
+alias ls='ls --color=auto'
+alias lsm='ls -l --block-size=M'
+alias ss-p="sudo systemctl poweroff"
+alias ss-r="sudo systemctl reboot"
+alias ss-en="sudo systemctl enable"     
+alias ss-start="sudo systemctl start"     
+alias ss-stop="sudo systemctl stop"     
+alias jc-v="journalctl --vacuum-time=4weeks"
+alias ss="sudo systemctl"     
+alias jc="journalctl"
+
+alias yay-db="yay -Y --gendb"
+alias yay-dev="yay -Syu --devel"
+alias yayrm="yay -Rns" 
+
+alias drop-caches-yay= 'sudo paccache -rk3; paccache -ruk0; yay -Sc --aur --noconfirm'
+alias drop-caches-paru='sudo paccache -rk3; paccache -ruk0; paru -Sc --aur --noconfirm'
+
+alias rmorph='sudo pacman -Rns $(pacman -Qtdq)'  
+alias pacsize="expac -H M '%m\t%n' | sort -h"
+alias pacview="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+
+alias um-vpn="/opt/cisco/anyconnect/bin/vpn connect umvpn.umnet.umich.edu/umvpn-split-tunnel-alt"
+alias um-vpn-dis="/opt/cisco/anyconnect/bin/vpn disconnect"
+
+# Git
+alias git-a="git add ."
+alias git-c="git commit -m"
+alias git-p="git push"
+alias git-ch="git checkout"
+alias git-m="git merge"
+
+## Useful aliases
+alias grubup="sudo update-grub"
+alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias tarnow='tar -acf '
+alias untar='tar -zxvf '
+alias wget='wget -c '
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias hw='hwinfo --short'                                   # Hardware Info
+alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed packages according to size in MB (expac must be installed)
+alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'			# List amount of -git packages
+
+# Get fastest mirrors 
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist" 
+alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist" 
+alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist" 
+alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist" 
+
+# Help people new to Arch
+alias apt-get='man pacman'
+alias apt='man pacman'
+alias helpme='cht.sh --shell'
+alias pacdiff='sudo -H DIFFPROG=meld pacdiff'
+alias please='sudo'
+alias tb='nc termbin.com 9999'
+alias upd="/usr/bin/update"
+
+# Replace yay with paru if installed
+# [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
