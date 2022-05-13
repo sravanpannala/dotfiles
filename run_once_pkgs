@@ -1,5 +1,4 @@
 #!/bin/bash
-
 read -p "If you want a full package install choose yes, otherwise choose no? (y/n) " yn
 
 case $yn in
