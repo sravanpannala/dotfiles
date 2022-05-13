@@ -1,0 +1,1 @@
+sudo sed -i 's/$/ usbhid.mousepoll=6/' /boot/cmdline.txt
