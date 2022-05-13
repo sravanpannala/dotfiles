@@ -5,5 +5,5 @@ case $yn in
 	y ) sudo pacman -S --noconfirm --needed - < pkglist_full;;
 	n ) sudo pacman -S --noconfirm --needed - < pkglist_min;;
 	* ) echo invalid response;
-		exit 1;;
+		continue;;
 esac
