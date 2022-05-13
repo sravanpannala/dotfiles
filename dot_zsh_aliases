@@ -26,11 +26,16 @@ alias um-vpn="/opt/cisco/anyconnect/bin/vpn connect umvpn.umnet.umich.edu/umvpn-
 alias um-vpn-dis="/opt/cisco/anyconnect/bin/vpn disconnect"
 
 # Git
-alias git-a="git add ."
-alias git-c="git commit -m"
-alias git-p="git push"
-alias git-ch="git checkout"
-alias git-m="git merge"
+alias g-a="git add ."
+alias g-c="git commit -m"
+alias g-p="git pull"
+alias g-P="git push"
+alias g-ch="git checkout"
+alias g-m="git merge"
+
+# Apps
+alias rn="ranger"
+alias lg="lazygit"
 
 ## Useful aliases
 alias grubup="sudo update-grub"
