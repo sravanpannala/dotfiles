@@ -24,6 +24,8 @@ alias rmorph='sudo pacman -Rns $(pacman -Qtdq)'
 alias pacsize="expac -H M '%m\t%n' | sort -h"
 alias pacview="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
+alias zll="zellij --layout strider"
+
 alias um-vpn="/opt/cisco/anyconnect/bin/vpn connect umvpn.umnet.umich.edu/umvpn-split-tunnel-alt"
 alias um-vpn-dis="/opt/cisco/anyconnect/bin/vpn disconnect"
 
