@@ -4,6 +4,7 @@ read -p "Do you want to install AUR packages (y/n) " yn
 pkglist_aur="btrfs-assistant-git
 pacseek
 nvim-packer-git
+macchina
 btrfsmaintenance"
 
 echo -e "$pkglist_aur" > pkglist_aur
