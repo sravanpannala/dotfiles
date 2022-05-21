@@ -36,6 +36,7 @@ alias g-p="git pull"
 alias g-P="git push"
 alias g-ch="git checkout"
 alias g-m="git merge"
+alias g-cl="git clone"
 
 # Apps
 alias rn="ranger"
