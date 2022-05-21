@@ -33,6 +33,10 @@ snapper
 arch-install-scripts
 byobu
 zellij
+zoxide
+diskus
+dust
+dua-cli
 "
 
 pkglist_min="micro
