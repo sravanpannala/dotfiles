@@ -16,6 +16,8 @@ alias jc="journalctl"
 alias yay-db="yay -Y --gendb"
 alias yay-dev="yay -Syu --devel"
 alias yayrm="yay -Rns" 
+alias ppl="sudo powerpill"
+alias updt="sudo pacman -Sy && sudo powerpill -Su && yay -Su --devel"
 
 alias drop-caches-yay= 'sudo paccache -rk3; paccache -ruk0; yay -Sc --aur --noconfirm'
 alias drop-caches-paru='sudo paccache -rk3; paccache -ruk0; paru -Sc --aur --noconfirm'
@@ -41,6 +43,11 @@ alias g-cl="git clone"
 # Apps
 alias rn="ranger"
 alias lg="lazygit"
+alias zll="zellij --layout strider"
+
+# UM VPN
+alias um-vpn="/opt/cisco/anyconnect/bin/vpn connect umvpn.umnet.umich.edu/umvpn-split-tunnel-alt"
+alias um-vpn-dis="/opt/cisco/anyconnect/bin/vpn disconnect"
 
 ## Useful aliases
 alias grubup="sudo update-grub"
