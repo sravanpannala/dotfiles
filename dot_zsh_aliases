@@ -17,7 +17,7 @@ alias yay-db="yay -Y --gendb"
 alias yay-dev="yay -Syu --devel"
 alias yayrm="yay -Rns" 
 alias ppl="sudo powerpill"
-alias updt="sudo pacman -Sy && sudo powerpill -Su && yay -Su --devel"
+alias updt="sudo pacman -Sy && sudo powerpill -Su && yay -Su --aur --devel"
 
 alias drop-caches-yay= 'sudo paccache -rk3; paccache -ruk0; yay -Sc --aur --noconfirm'
 alias drop-caches-paru='sudo paccache -rk3; paccache -ruk0; paru -Sc --aur --noconfirm'
