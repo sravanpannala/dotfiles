@@ -10,7 +10,7 @@ alias ss-en="sudo systemctl enable"
 alias ss-start="sudo systemctl start"     
 alias ss-stop="sudo systemctl stop"     
 alias jc-v="journalctl --vacuum-time=4weeks"
-alias ss="sudo systemctl"     
+alias ssy="sudo systemctl"     
 alias jc="journalctl"
 
 alias yay-db="yay -Y --gendb"
