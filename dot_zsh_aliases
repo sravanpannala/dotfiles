@@ -12,6 +12,8 @@ alias ss-stop="sudo systemctl stop"
 alias jc-v="journalctl --vacuum-time=4weeks"
 alias ssy="sudo systemctl"     
 alias jc="journalctl"
+alias rmpkg="rm -rf pkg src"
+alias rmrf="rm -rf"
 
 alias yay-db="yay -Y --gendb"
 alias yay-dev="yay -Syu --devel"
