@@ -28,7 +28,7 @@ alias rmorph='sudo pacman -Rns $(pacman -Qtdq)'
 alias pacsize="expac -H M '%m\t%n' | sort -h"
 alias pacview="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
-alias um-vpn="openconnect-sso -p ~/Documents/anyconnect-linux/Profiles/vpn/UMVPN-2.xm"
+alias um-vpn="openconnect-sso -p ~/Documents/anyconnect-linux/Profiles/vpn/UMVPN-2.xml"
 alias um-vpn-64="/opt/cisco/anyconnect/bin/vpn connect umvpn.umnet.umich.edu/umvpn-split-tunnel-alt"
 alias um-vpn-64-dis="/opt/cisco/anyconnect/bin/vpn disconnect"
 
@@ -40,16 +40,13 @@ alias g-P="git push"
 alias g-ch="git checkout"
 alias g-m="git merge"
 alias g-cl="git clone"
+alias g-ft="git fetch --prune --prune-tags"
 
 # Apps
 alias rn="ranger"
 alias lg="lazygit"
 alias zll="zellij --layout strider"
 alias chez="chezmoi"
-
-# UM VPN
-alias um-vpn="/opt/cisco/anyconnect/bin/vpn connect umvpn.umnet.umich.edu/umvpn-split-tunnel-alt"
-alias um-vpn-dis="/opt/cisco/anyconnect/bin/vpn disconnect"
 
 ## Useful aliases
 alias grubup="sudo update-grub"
