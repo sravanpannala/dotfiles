@@ -9,7 +9,8 @@ alias ss-r="sudo systemctl reboot"
 alias ss-en="sudo systemctl enable"     
 alias ss-start="sudo systemctl start"     
 alias ss-stop="sudo systemctl stop"     
-alias jc-v="journalctl --vacuum-time=4weeks"
+alias jc-vt="sudo journalctl --vacuum-time=4weeks"
+alias jc-vs="sudo journalctl --vacuum-size=250M"
 alias ssy="sudo systemctl"     
 alias jc="journalctl"
 alias rmpkg="rm -rf pkg src"
@@ -21,8 +22,8 @@ alias yayrm="yay -Rns"
 alias ppl="sudo powerpill"
 alias updt="sudo pacman -Sy && sudo powerpill -Su && yay -Su --aur --devel"
 
-alias drop-caches-yay= 'sudo paccache -rk3; paccache -ruk0; yay -Sc --aur --noconfirm'
-alias drop-caches-paru='sudo paccache -rk3; paccache -ruk0; paru -Sc --aur --noconfirm'
+alias drop-caches-yay='sudo paccache -rk3 && sudo paccache -ruk0 && yay -Sc --aur --noconfirm'
+alias drop-caches-paru='sudo paccache -rk3 && sudo paccache -ruk0 && paru -Sc --aur --noconfirm'
 
 alias rmorph='sudo pacman -Rns $(pacman -Qtdq)'  
 alias pacsize="expac -H M '%m\t%n' | sort -h"
