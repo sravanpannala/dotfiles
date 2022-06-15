@@ -6,13 +6,16 @@ alias exa='exa --icons'
 
 alias ss-p="sudo systemctl poweroff"
 alias ss-r="sudo systemctl reboot"
-alias ss-en="sudo systemctl enable"     
-alias ss-start="sudo systemctl start"     
-alias ss-stop="sudo systemctl stop"     
+alias ss-e="sudo systemctl enable"
+alias ss-start="sudo systemctl start"
+alias ss-stop="sudo systemctl stop"
+alias ssy="sudo systemctl"
+alias ss-en="sudo systemctl enable --now"
+
 alias jc-vt="sudo journalctl --vacuum-time=4weeks"
 alias jc-vs="sudo journalctl --vacuum-size=250M"
-alias ssy="sudo systemctl"     
 alias jc="journalctl"
+
 alias rmpkg="rm -rf pkg src"
 alias rmrf="rm -rf"
 
