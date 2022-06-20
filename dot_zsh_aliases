@@ -7,11 +7,13 @@ alias nperm='stat -c "%a %n"'
 
 alias ss-p="sudo systemctl poweroff"
 alias ss-r="sudo systemctl reboot"
+alias ss-rs="sudo systemctl restart"
 alias ss-e="sudo systemctl enable"
+alias ss-en="sudo systemctl enable --now"
+alias ss-d="sudo systemctl daemon-reload"
 alias ss-start="sudo systemctl start"
 alias ss-stop="sudo systemctl stop"
 alias ssy="sudo systemctl"
-alias ss-en="sudo systemctl enable --now"
 
 alias jc-vt="sudo journalctl --vacuum-time=4weeks"
 alias jc-vs="sudo journalctl --vacuum-size=250M"
@@ -19,10 +21,12 @@ alias jc="journalctl"
 
 alias rmpkg="rm -rf pkg src"
 alias rmrf="rm -rf"
+alias srmrf="sudo rm -rf"
 
 alias yay-db="yay -Y --gendb"
 alias yay-dev="yay -Syu --devel"
 alias yayrm="yay -Rns" 
+alias pacu="sudo pacman -U"
 alias ppl="sudo powerpill"
 alias updt="sudo pacman -Sy && sudo powerpill -Su && yay -Su --aur --devel"
 
