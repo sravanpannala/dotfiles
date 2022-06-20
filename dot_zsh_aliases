@@ -3,6 +3,7 @@ alias vi="nvim"
 alias ls='ls --color=auto'
 alias lsm='ls -l --block-size=M'
 alias exa='exa --icons'
+alias nperm='stat -c "%a %n"'
 
 alias ss-p="sudo systemctl poweroff"
 alias ss-r="sudo systemctl reboot"
