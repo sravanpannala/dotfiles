@@ -5,6 +5,8 @@ alias lsm='ls -l --block-size=M'
 alias exa='exa --icons'
 alias nperm='stat -c "%a %n"'
 
+alias s="sudo"
+alias sy="systemctl"
 alias ss-p="sudo systemctl poweroff"
 alias ss-r="sudo systemctl reboot"
 alias ss-rs="sudo systemctl restart"
