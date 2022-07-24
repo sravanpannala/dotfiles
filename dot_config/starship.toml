@@ -84,6 +84,7 @@ ssh_only = false
 
 [lua]
 format = '\[[$symbol($version)]($style)\]'
+symbol = ''
 
 [memory_usage]
 disabled = false
