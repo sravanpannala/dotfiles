@@ -36,7 +36,7 @@ alias srmrf="sudo rm -rf"
 
 alias yay-db="yay -Y --gendb"
 alias yay-dev="yay -Syu --devel"
-alias yayrm="yay -Rns" 
+alias yayrm="yay -Rs" 
 alias pacu="sudo pacman -U"
 alias ppl="sudo powerpill"
 alias updt="sudo pacman -Sy && sudo powerpill -Su && yay -Su --aur --devel"
