@@ -33,11 +33,11 @@ dfc
 snapper
 arch-install-scripts
 byobu
-zellij
 zoxide
 diskus
 dust
 dua-cli
+trash-cli
 "
 
 pkglist_min="micro
