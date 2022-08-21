@@ -1,0 +1,6 @@
+export CCACHE_PREFIX=icecc
+export PATH=/usr/lib/icecream/bin:$PATH
+export PATH=/usr/lib/ccache/bin/:$PATH
+export ICECC_VERSION=~/Sync/software/linux/toolchain/22cf2f3dcdd0358414ac7347e7fc8c2f.tar.gz,x86_64:~/Sync/software/linux/toolchain/9434f77b019f4a06704c8aba22c1f637.tar.gz
+export CHROOT=$HOME/chroot
+export GPGKEY=8AD2DB862F3CA7B90B9CAF578B7B0A2203562CF6
