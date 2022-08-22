@@ -39,6 +39,7 @@ dust
 dua-cli
 trash-cli
 asp
+nvm
 "
 
 pkglist_min="micro
