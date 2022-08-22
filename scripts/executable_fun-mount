@@ -1,0 +1,71 @@
+#!/bin/bash
+
+_help() {
+   # Display Help
+   printf "\nHELP\n"
+   printf "Mount Image for Chroot\n"
+   printf "options:\n"
+   printf "Either two options -d -f are required\n"
+   printf "Or the single option -h\n\n"
+   printf " -d  enter device name\n"
+   printf " -f  ext4 or btrfs\n"
+   printf " -h  Print this Help.\n\n"
+   printf "example:  mount-fun -d sda -f btrfs\n\n"
+}
+
+#################################################
+##           start of script                   ##
+#################################################
+
+DEV=""
+FS=""
+
+if [ "$#" == "0" ] || [ "$1" == "-h" ]; then
+    _help
+    exit
+fi
+
+case $1 in
+   -d)  DEV="/dev/$2";;
+   -f)  if [ "$2" == "ext4" ] || [ "$2" == "btrfs" ]; then
+           case $2 in
+              ext4) FS="ext4" ;;
+              btrfs) FS="btrfs" ;;
+           esac
+        fi ;;
+esac
+
+case $3 in
+   -d)  DEV="/dev/$4";;
+   -f)  if [ "$4" == "ext4" ] || [ "$4" == "btrfs" ]; then
+           case $4 in
+              ext4) FS="ext4" ;;
+              btrfs) FS="btrfs" ;;
+           esac
+        fi ;;
+esac
+
+
+
+printf "\nDevice = $DEV"
+printf "\nFile System = $FS\n"
+
+DEV1="$DEV"1
+DEV2="$DEV"2
+echo $DEV1
+echo $DEV2
+
+mkdir -p MP
+
+if [ "$FS" == "ext4" ]; then
+   mount $DEV2 MP
+   mount $DEV1 MP/boot
+fi
+
+if [ "$FS" == "btrfs" ]; then
+    mount $DEV2 MP -o subvol=@
+    mount $DEV2 MP/home -o subvol=@home
+    mount $DEV2 MP/var/log -o subvol=@log
+    mount $DEV2 MP/var/cache -o subvol=@cache
+    mount $DEV1 MP/boot
+fi

@@ -1,0 +1,46 @@
+#!/bin/bash
+
+_help() {
+   # Display Help
+   printf "\nHELP\n"
+   printf "umount Image \n"
+   printf "options:\n"
+   printf "This options -f is required\n"
+   printf "Or the single option -h\n\n"
+   printf " -f  ext4 or btrfs\n"
+   printf " -h  Print this Help.\n\n"
+   printf "example:  umount-fun -f btrfs\n\n"
+}
+
+#################################################
+##           start of script                   ##
+#################################################
+
+DEV=""
+FS=""
+
+if [ "$#" == "0" ] || [ "$1" == "-h" ]; then
+    _help
+    exit
+fi
+
+case $1 in
+   -f)  if [ "$2" == "ext4" ] || [ "$2" == "btrfs" ]; then
+           case $2 in
+              ext4) FS="ext4" ;;
+              btrfs) FS="btrfs" ;;
+           esac
+        fi ;;
+esac
+
+
+if [ "$FS" == "ext4" ]; then
+   umount MP/boot MP
+fi
+
+if [ "$FS" == "btrfs" ]; then
+    umount MP/home MP/var/log MP/var/cache MP/boot MP
+fi
+
+
+rm -rf MP

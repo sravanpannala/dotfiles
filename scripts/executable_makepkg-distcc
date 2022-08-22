@@ -1,4 +1,6 @@
 #!/bin/bash
+#export PATH="/usr/lib/ccache/bin/:$PATH"
+#export CCACHE_PREFIX="distcc"
 export PATH=/usr/lib/distcc/bin:$PATH 
 export MAKEFLAGS="-j$1"
 time makepkg -sfc
