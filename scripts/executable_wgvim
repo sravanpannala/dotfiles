@@ -1,0 +1,4 @@
+#!/bin/bash
+
+wget -O ~/test/logs.txt $1
+nvim ~/test/logs.txt

@@ -1,0 +1,4 @@
+#!/bin/bash
+export PATH=/usr/lib/distcc/bin:$PATH 
+export MAKEFLAGS="-j$1"
+time makepkg -sfc
