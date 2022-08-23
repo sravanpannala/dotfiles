@@ -5,6 +5,7 @@ pkglist_aur="btrfs-assistant-git
 pacseek
 nvim-packer-git
 nvm
+icecream
 btrfsmaintenance"
 #macchina
 
