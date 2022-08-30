@@ -5,11 +5,12 @@ _help() {
    printf "\nHELP\n"
    printf "umount Image \n"
    printf "options:\n"
-   printf "This options -f is required\n"
+   printf "Either two options -f -b is required\n"
    printf "Or the single option -h\n\n"
    printf " -f  ext4 or btrfs\n"
+   printf " -b  BIOS or UEFI\n"
    printf " -h  Print this Help.\n\n"
-   printf "example:  umount-fun -f btrfs\n\n"
+   printf "example:  umount-fun -f btrfs -b BIOS\n\n"
 }
 
 #################################################
@@ -19,27 +20,52 @@ _help() {
 DEV=""
 FS=""
 
-if [ "$#" == "0" ] || [ "$1" == "-h" ]; then
-    _help
-    exit
-fi
+# Available options
+opt=":f:b:h"
 
-case $1 in
-   -f)  if [ "$2" == "ext4" ] || [ "$2" == "btrfs" ]; then
-           case $2 in
-              ext4) FS="ext4" ;;
-              btrfs) FS="btrfs" ;;
-           esac
-        fi ;;
-esac
+
+while getopts "${opt}" arg; do
+  case $arg in
+    f)
+      FS="${OPTARG}"
+      ;;
+    b)
+      BL="${OPTARG}"
+      ;;
+    \?)
+      echo "Option -${OPTARG} is not valid, aborting"
+      exit 1
+      ;;
+    h|?)
+      _help
+      exit 1
+      ;;
+    :)
+      echo "Option -${OPTARG} requires an argument, aborting"
+      exit 1
+      ;;
+  esac
+done
+
+
 
 
 if [ "$FS" == "ext4" ]; then
-   umount MP/boot MP
+   if [ "$BL" == "UEFI" ]; then
+      umount MP/boot/efi
+   else
+      umount MP/boot
+   fi
+   umount MP
 fi
 
 if [ "$FS" == "btrfs" ]; then
-    umount MP/home MP/var/log MP/var/cache MP/boot MP
+   if [ "$BL" == "UEFI" ]; then
+      umount MP/boot/efi
+   else
+      umount MP/boot
+   fi
+   umount MP/home MP/var/log MP/var/cache MP
 fi
 
 

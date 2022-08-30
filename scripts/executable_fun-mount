@@ -5,12 +5,13 @@ _help() {
    printf "\nHELP\n"
    printf "Mount Image for Chroot\n"
    printf "options:\n"
-   printf "Either two options -d -f are required\n"
+   printf "Either three options -d -f -b are required\n"
    printf "Or the single option -h\n\n"
    printf " -d  enter device name\n"
    printf " -f  ext4 or btrfs\n"
+   printf " -b  BIOS or UEFI\n"
    printf " -h  Print this Help.\n\n"
-   printf "example:  mount-fun -d sda -f btrfs\n\n"
+   printf "example:  mount-fun -d sda -f btrfs -b BIOS\n\n"
 }
 
 #################################################
@@ -19,53 +20,119 @@ _help() {
 
 DEV=""
 FS=""
+BL=""
 
-if [ "$#" == "0" ] || [ "$1" == "-h" ]; then
-    _help
-    exit
-fi
+# Available options
+opt=":d:f:b:h"
 
-case $1 in
-   -d)  DEV="/dev/$2";;
-   -f)  if [ "$2" == "ext4" ] || [ "$2" == "btrfs" ]; then
-           case $2 in
-              ext4) FS="ext4" ;;
-              btrfs) FS="btrfs" ;;
-           esac
-        fi ;;
-esac
 
-case $3 in
-   -d)  DEV="/dev/$4";;
-   -f)  if [ "$4" == "ext4" ] || [ "$4" == "btrfs" ]; then
-           case $4 in
-              ext4) FS="ext4" ;;
-              btrfs) FS="btrfs" ;;
-           esac
-        fi ;;
-esac
+while getopts "${opt}" arg; do
+  case $arg in
+    d)
+      DEV="/dev/${OPTARG}"
+      ;;
+    f)
+      FS="${OPTARG}"
+      ;;
+    b)
+      BL="${OPTARG}"
+      ;;
+    \?)
+      echo "Option -${OPTARG} is not valid, aborting"
+      exit 1
+      ;;
+    h|?)
+      _help
+      exit 1
+      ;;
+    :)
+      echo "Option -${OPTARG} requires an argument, aborting"
+      exit 1
+      ;;
+  esac
+done
 
+
+# if [ "$#" == "0" ] || [ "$1" == "-h" ]; then
+#     _help
+#     exit
+# fi
+#
+# case $1 in
+#    -d)  DEV="/dev/$2";;
+#    -f)  if [ "$2" == "ext4" ] || [ "$2" == "btrfs" ]; then
+#            case $2 in
+#               ext4) FS="ext4" ;;
+#               btrfs) FS="btrfs" ;;
+#            esac
+#         fi ;;
+#    -b)  if [ "$2" == "BIOS" ] || [ "$2" == "UEFI" ]; then
+#            case $2 in
+#               BIOS) BL="BIOS" ;;
+#               UEFI) BL="UEFI" ;;
+#            esac
+#         fi ;;
+# esac
+#
+# case $3 in
+#    -d)  DEV="/dev/$4";;
+#    -f)  if [ "$4" == "ext4" ] || [ "$4" == "btrfs" ]; then
+#            case $4 in
+#               ext4) FS="ext4" ;;
+#               btrfs) FS="btrfs" ;;
+#            esac
+#         fi ;;
+#    -b)  if [ "$4" == "BIOS" ] || [ "$4" == "UEFI" ]; then
+#            case $4 in
+#               BIOS) BL="BIOS" ;;
+#               UEFI) BL="UEFI" ;;
+#            esac
+#         fi ;;
+# esac
+#
+# case $5 in
+#    -d)  DEV="/dev/$6";;
+#    -f)  if [ "$6" == "ext4" ] || [ "$6" == "btrfs" ]; then
+#            case $6 in
+#               ext4) FS="ext4" ;;
+#               btrfs) FS="btrfs" ;;
+#            esac
+#         fi ;;
+#    -b)  if [ "$6" == "BIOS" ] || [ "$6" == "UEFI" ]; then
+#            case $6 in
+#               BIOS) BL="BIOS" ;;
+#               UEFI) BL="UEFI" ;;
+#            esac
+#         fi ;;
+# esac
 
 
 printf "\nDevice = $DEV"
 printf "\nFile System = $FS\n"
+# printf "\nDevice type = $BL\n"
 
 DEV1="$DEV"1
 DEV2="$DEV"2
-echo $DEV1
-echo $DEV2
 
 mkdir -p MP
 
 if [ "$FS" == "ext4" ]; then
    mount $DEV2 MP
-   mount $DEV1 MP/boot
+   if [ "$BL" == "UEFI" ]; then
+      mount $DEV1 MP/boot/efi
+   else
+      mount $DEV1 MP/boot
+   fi
 fi
 
 if [ "$FS" == "btrfs" ]; then
-    mount $DEV2 MP -o subvol=@
-    mount $DEV2 MP/home -o subvol=@home
-    mount $DEV2 MP/var/log -o subvol=@log
-    mount $DEV2 MP/var/cache -o subvol=@cache
-    mount $DEV1 MP/boot
+   mount $DEV2 MP -o subvol=@
+   mount $DEV2 MP/home -o subvol=@home
+   mount $DEV2 MP/var/log -o subvol=@log
+   mount $DEV2 MP/var/cache -o subvol=@cache
+   if [ "$BL" == "UEFI" ]; then
+      mount $DEV1 MP/boot/efi
+   else
+      mount $DEV1 MP/boot
+   fi
 fi
