@@ -1,5 +1,6 @@
 export CCACHE_PREFIX=icecc
 export PATH=~/.nix-profile/bin:$PATH
+export PATH=~/.local/bin:$PATH
 export PATH=~/scripts:$PATH
 export PATH=/usr/lib/icecream/bin:$PATH
 export PATH=/usr/lib/ccache/bin/:$PATH
