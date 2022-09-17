@@ -23,7 +23,6 @@ FS=""
 # Available options
 opt=":f:b:h"
 
-
 while getopts "${opt}" arg; do
   case $arg in
     f)

@@ -52,61 +52,6 @@ while getopts "${opt}" arg; do
   esac
 done
 
-
-# if [ "$#" == "0" ] || [ "$1" == "-h" ]; then
-#     _help
-#     exit
-# fi
-#
-# case $1 in
-#    -d)  DEV="/dev/$2";;
-#    -f)  if [ "$2" == "ext4" ] || [ "$2" == "btrfs" ]; then
-#            case $2 in
-#               ext4) FS="ext4" ;;
-#               btrfs) FS="btrfs" ;;
-#            esac
-#         fi ;;
-#    -b)  if [ "$2" == "BIOS" ] || [ "$2" == "UEFI" ]; then
-#            case $2 in
-#               BIOS) BL="BIOS" ;;
-#               UEFI) BL="UEFI" ;;
-#            esac
-#         fi ;;
-# esac
-#
-# case $3 in
-#    -d)  DEV="/dev/$4";;
-#    -f)  if [ "$4" == "ext4" ] || [ "$4" == "btrfs" ]; then
-#            case $4 in
-#               ext4) FS="ext4" ;;
-#               btrfs) FS="btrfs" ;;
-#            esac
-#         fi ;;
-#    -b)  if [ "$4" == "BIOS" ] || [ "$4" == "UEFI" ]; then
-#            case $4 in
-#               BIOS) BL="BIOS" ;;
-#               UEFI) BL="UEFI" ;;
-#            esac
-#         fi ;;
-# esac
-#
-# case $5 in
-#    -d)  DEV="/dev/$6";;
-#    -f)  if [ "$6" == "ext4" ] || [ "$6" == "btrfs" ]; then
-#            case $6 in
-#               ext4) FS="ext4" ;;
-#               btrfs) FS="btrfs" ;;
-#            esac
-#         fi ;;
-#    -b)  if [ "$6" == "BIOS" ] || [ "$6" == "UEFI" ]; then
-#            case $6 in
-#               BIOS) BL="BIOS" ;;
-#               UEFI) BL="UEFI" ;;
-#            esac
-#         fi ;;
-# esac
-
-
 printf "\nDevice = $DEV"
 printf "\nFile System = $FS\n"
 # printf "\nDevice type = $BL\n"
