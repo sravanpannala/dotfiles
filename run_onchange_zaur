@@ -1,22 +1,20 @@
 #!/bin/bash
 read -p "Do you want to install AUR packages (y/n) " yn
 
-pkglist_aur="btrfs-assistant-git
-pacseek
+pkglist_aur="pacseek
 nvim-packer-git
 nvm
-icecream
-btrfsmaintenance"
+icecream"
 #macchina
 
 echo -e "$pkglist_aur" > pkglist_aur
 
-mkdir -p ~/.build
-
-yay --builddir ~/.build --save
+# mkdir -p ~/.build
+# yay --builddir ~/.build --save
+yay -S --noconfirm --needed paru
 
 case $yn in
-	y )	yay -S --noconfirm --needed - < pkglist_aur;;
+	y )	paru -S --noconfirm --needed - < pkglist_aur;;
 	* ) echo continue;;
 esac
 

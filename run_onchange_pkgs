@@ -46,14 +46,17 @@ pkglist_min="micro
 barrier
 btop
 bat
-ncdu
+dua-cli
 duf
+fd
+exa
 lazygit
 ranger
 ripgrep
 neovim
-xclip
+xsel
 fd
+zoxide
 "
 
 echo -e "$pkglist_full" > pkglist_full

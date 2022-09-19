@@ -1,0 +1,16 @@
+#!/bin/bash
+read -p "Do you want to install btrfs support (y/n) " yn
+
+pkglist_btrfs="btrfs-assistant-git
+snapper
+btrfsmaintenance"
+
+echo -e "$pkglist_btrfs" > pkglist_aur
+
+
+case $yn in
+	y )	paru -S --noconfirm --needed - < pkglist_btrfs;;
+	* ) echo continue;;
+esac
+
+rm -rf pkglist_btrfs
