@@ -1,77 +1,53 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
-_help() {
-   # Display Help
-   printf "\nHELP\n"
-   printf "umount Image \n"
-   printf "options:\n"
-   printf "Either two options -f -b is required\n"
-   printf "Or the single option -h\n\n"
-   printf " -f  ext4 or btrfs\n"
-   printf " -b  BIOS or UEFI\n"
-   printf " -h  Print this Help.\n\n"
-   printf "example:  umount-fun -f btrfs -b BIOS\n\n"
-}
-
-#################################################
-##           start of script                   ##
-#################################################
-
-DEV=""
-FS=""
-
-# Available options
-opt=":f:b:h"
-if [[ ! $@ =~ ^\-.+ ]]
-then
-  echo "The script requires an argument, aborting"
-  _help
-  exit 1
-fi
-
-while getopts "${opt}" arg; do
-  case $arg in
-    f)
-      FS="${OPTARG}"
-      ;;
-    b)
-      BL="${OPTARG}"
-      ;;
-    \?)
-      echo "Option -${OPTARG} is not valid, aborting"
-      exit 1
-      ;;
-    h|?)
-      _help
-      exit 1
-      ;;
-    :)
-      echo "Option -${OPTARG} requires an argument, aborting"
-      exit 1
-      ;;
-  esac
-done
+import argparse
+import subprocess
 
 
+def parse_function():
+    parser = argparse.ArgumentParser(
+        description="Function to mount a device for chroot"
+    )
+    parser.add_argument(
+        "--filesystem",
+        "-f",
+        default="ext4",
+        choices=["ext4", "btrfs"],
+        help="Filesystem on the device ext4 or btrfs",
+    )
+    parser.add_argument(
+        "--bootloader",
+        "-b",
+        default="BIOS",
+        choices=["BIOS", "UEFI"],
+        help="Boot partition type BIOS or UEFI",
+    )
+
+    args = parser.parse_args()
+
+    return parser, args
 
 
-if [ "$FS" == "ext4" ]; then
-   if [ "$BL" == "UEFI" ]; then
-      umount MP/boot/efi
-   else
-      umount MP/boot
-   fi
-   umount MP
-fi
+def main():
+    parser, args = parse_function()
+    print("Argument values:")
+    print(args.filesystem)
+    print(args.bootloader)
 
-if [ "$FS" == "btrfs" ]; then
-   if [ "$BL" == "UEFI" ]; then
-      umount MP/boot/efi
-   else
-      umount MP/boot
-   fi
-   umount MP/home MP/var/log MP/var/cache MP
-fi
+    if args.bootloader == "UEFI":
+        boot_dir = "MP/boot/efi"
+    else:
+        boot_dir = "MP/boot"
+    subprocess.call(["umount", boot_dir])
+
+    if args.filesystem == "ext4":
+        subprocess.call(["umount", "MP"])
+    elif args.filesystem == "btrfs":
+        mtptt = ["/home", "/var/log", "/var/cache", ""]
+        mtpts = ["MP" + x for x in mtptt]
+        for i, (mtpt) in enumerate(mtpts):
+            subprocess.call(["umount", mtpt])
 
 
-rm -rf MP
+if __name__ == "__main__":
+    main()

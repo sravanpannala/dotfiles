@@ -1,92 +1,75 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
-_help() {
-   # Display Help
-   printf "\nHELP\n"
-   printf "Mount Image for Chroot\n"
-   printf "options:\n"
-   printf "Either three options -d -f -b are required\n"
-   printf "Or the single option -h\n\n"
-   printf " -d  enter device name\n"
-   printf " -f  ext4 or btrfs\n"
-   printf " -b  BIOS or UEFI\n"
-   printf " -h  Print this Help.\n\n"
-   printf "example:  mount-fun -d sda -f btrfs -b BIOS\n\n"
-}
-
-#################################################
-##           start of script                   ##
-#################################################
-
-DEV=""
-FS=""
-BL=""
-
-# Available options
-opt=":d:f:b:h"
-local OPTIND
-
-if [[ ! $@ =~ ^\-.+ ]]
-then
-  echo "The script requires an argument, aborting"
-  _help
-  exit 1
-fi
+import argparse
+import subprocess
 
 
-while getopts "${opt}" arg; do
-  case $arg in
-    d)
-      DEV="/dev/${OPTARG}"
-      ;;
-    f)
-      FS="${OPTARG}"
-      ;;
-    b)
-      BL="${OPTARG}"
-      ;;
-    \?)
-      echo "Option -${OPTARG} is not valid, aborting"
-      exit 1
-      ;;
-    h|?)
-      _help
-      exit 1
-      ;;
-    :)
-      echo "Option -${OPTARG} requires an argument, aborting"
-      exit 1
-      ;;
-  esac
-done
-shift $((OPTIND-1))
+def parse_function():
+    parser = argparse.ArgumentParser(
+        description="Function to mount a device for chroot"
+    )
+    parser.add_argument(
+        "--device",
+        "-d",
+        required=True,
+        help="Device name to mount, ex: sda, mmcblk1, nvme0n1",
+    )
+    parser.add_argument(
+        "--filesystem",
+        "-f",
+        default="ext4",
+        choices=["ext4", "btrfs"],
+        help="Filesystem on the device ext4 or btrfs",
+    )
+    parser.add_argument(
+        "--bootloader",
+        "-b",
+        default="BIOS",
+        choices=["BIOS", "UEFI"],
+        help="Boot partition type BIOS or UEFI",
+    )
 
-printf "\nDevice = $DEV"
-printf "\nFile System = $FS\n"
-# printf "\nDevice type = $BL\n"
+    args = parser.parse_args()
 
-DEV1="$DEV"1
-DEV2="$DEV"2
+    devs = ["sd", "mmcblk", "nvme", "loop"]
+    if all(x not in args.device for x in devs):
+        parser.error("Enter correct device name")
 
-mkdir -p MP
+    return parser, args
 
-if [ "$FS" == "ext4" ]; then
-   mount $DEV2 MP
-   if [ "$BL" == "UEFI" ]; then
-      mount $DEV1 MP/boot/efi
-   else
-      mount $DEV1 MP/boot
-   fi
-fi
 
-if [ "$FS" == "btrfs" ]; then
-   mount $DEV2 MP -o subvol=@
-   mount $DEV2 MP/home -o subvol=@home
-   mount $DEV2 MP/var/log -o subvol=@log
-   mount $DEV2 MP/var/cache -o subvol=@cache
-   if [ "$BL" == "UEFI" ]; then
-      mount $DEV1 MP/boot/efi
-   else
-      mount $DEV1 MP/boot
-   fi
-fi
+def main():
+    parser, args = parse_function()
+    print("Argument values:")
+    print("/dev/" + args.device)
+    print(args.filesystem)
+    print(args.bootloader)
+
+    dev = "/dev/" + args.device
+    if "sd" not in args.device:
+        dev = dev + "p"
+    dev1 = dev + "1"
+    dev2 = dev + "2"
+    print(dev2)
+
+    subprocess.call(["mkdir", "-p", "MP"])
+
+    if args.filesystem == "ext4":
+        subprocess.call(["mount", dev2, "MP"])
+    elif args.filesystem == "btrfs":
+        mtptt = ["", "/home", "/var/log", "/var/cache"]
+        mtpts = ["MP" + x for x in mtptt]
+        subvt = ["@", "@home", "@log", "@cache"]
+        subvs = ["subvol=" + x for x in subvt]
+        for i, (mtpt, subv) in enumerate(zip(mtpts, subvs)):
+            subprocess.call(["mount", dev2, mtpt, "-o", subv])
+
+    if args.bootloader == "UEFI":
+        boot_dir = "MP/boot/efi"
+    else:
+        boot_dir = "MP/boot"
+    subprocess.call(["mount", dev1, boot_dir])
+
+
+if __name__ == "__main__":
+    main()
