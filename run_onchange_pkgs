@@ -40,6 +40,8 @@ dua-cli
 trash-cli
 asp
 tailscale
+exfatprogs
+stress
 "
 
 pkglist_min="micro

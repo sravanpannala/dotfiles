@@ -5,6 +5,7 @@ local config = {
   plugins = {
     init = {
       { "catppuccin/nvim", as = "catppuccin", config = function() require("catppuccin").setup() end },
+      { "ellisonleao/glow.nvim", as = "glow", config = function() require("glow").setup() end },
     },
   },
   options = {
