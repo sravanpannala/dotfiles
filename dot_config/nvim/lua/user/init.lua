@@ -17,7 +17,7 @@ local config = {
   },
   options = {
     g = {
-      catppuccin_flavour = "macchiato",
+      catppuccin_flavour = "mocha",
     },
   },
   colorscheme = "catppuccin",

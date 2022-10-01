@@ -13,7 +13,7 @@ lazygit
 ranger
 ripgrep
 neovim
-xclip
+xsel
 fd
 exa
 ncdu
