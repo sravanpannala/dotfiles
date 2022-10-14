@@ -5,7 +5,7 @@ pkglist_btrfs="btrfs-assistant-git
 snapper
 btrfsmaintenance"
 
-echo -e "$pkglist_btrfs" > pkglist_aur
+echo -e "$pkglist_btrfs" > pkglist_btrfs
 
 
 case $yn in
