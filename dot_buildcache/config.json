@@ -1,0 +1,4 @@
+{
+  "max_cache_size": 10000000000,
+  "prefix": "/usr/lib/icecream/bin/icecc"
+}
