@@ -52,7 +52,7 @@ LOGO=""
 
 # Minimum network throughput that triggers the notification (in kbit/s)
 # Default: 20
-#NETWORK_THRESHOLD=20
+NETWORK_THRESHOLD=50
 
 # You can add an additional source of temperature here
 #MONITORED_TEMP=/proc/acpi/thermal_zone/THM0/temperature
