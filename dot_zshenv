@@ -6,7 +6,7 @@ export PATH=~/scripts:$PATH
 export PATH=/usr/lib/icecream/bin:$PATH
 export PATH=/usr/lib/ccache/bin/:$PATH
 # export PATH=/usr/lib/buildcache/bin/:$PATH
-export ICECC_VERSION=~/Sync/software/linux/toolchain/efc6ed3a57cf7a1f873b4a87c8a6a36f.tar.gz,x86_64:~/Sync/software/linux/toolchain/5fdac4d4df60a41b4deacddf7338a117.tar.gz
+export ICECC_VERSION=~/Sync/software/linux/toolchain/5f0fc89a2052a05362acd3163710f417.tar.gz,x86_64:~/Sync/software/linux/toolchain/5fdac4d4df60a41b4deacddf7338a117.tar.gz
 export CHROOT=$HOME/chroot
 export GPGKEY=8AD2DB862F3CA7B90B9CAF578B7B0A2203562CF6
 

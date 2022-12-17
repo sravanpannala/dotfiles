@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+
+import argparse
+from subprocess import run
+import os
+import time
+import glob
+import shutil
+from datetime import datetime
+import sys
+
+copy_dir = "/home/srapl/endeavouros-arm/packages/"
+
+CRED = "\033[41m"
+CEND = "\033[0m"
+
+
+def parse_function():
+    global pkg_fold
+    global cpy_fold
+    parser = argparse.ArgumentParser(
+        description="Function to build packages and copy to certain pkg_fold")
+    parser.add_argument(
+        "--copy",
+        "-c",
+        # required=True,
+        nargs="+",
+        help="pkg_fold to copy the created packages into, Available options: sar, saro, sraserve",
+    )
+
+    parser.add_argument(
+        "--base",
+        "-b",
+        required=True,
+        help="Base folder where the different PKGBUILD pkg_fold are located",
+    )
+
+    parser.add_argument(
+        "--packages",
+        "-p",
+        required=True,
+        nargs="+",
+        help="List of packages to build",
+    )
+
+    parser.add_argument(
+        "--sign",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Sign Packages",
+    )
+
+    args = parser.parse_args()
+    pkg_fold = [args.base + "/" + s + "/" for s in args.packages]
+    try:
+        cpy_fold = [copy_dir + s + "/" for s in args.copy]
+    except:
+        cpy_fold = []
+
+    return parser, args
+
+
+def build(args):
+    if args.sign:
+        fp = open("gpg_sign_test", "x")
+        fp.close()
+        run(
+            'gpg --local-user "sradjoker@endeavouros.com" --detach-sign gpg_sign_test',
+            shell=True,
+        )
+        run("rm -rf gpg_sign_test gpg_sign_test.sig", shell=True)
+    print(CRED + "Start of building packages" + CEND)
+    diff_time = []
+    for fol in pkg_fold:
+        start_time = time.time()
+        for fl in glob.glob(fol + "*tar*"):
+            os.remove(fl)
+        run("rm -rf pkg src", shell=True, cwd=fol)
+        run("updpkgsums", shell=True, cwd=fol)
+        try:
+            if args.sign:
+                run("makepkg -sfcA --sign", shell=True, cwd=fol)
+            else:
+                run("makepkg -sfcA", shell=True, cwd=fol)
+        except:
+            sys.exit(CRED + "Building package failed" + CEND)
+        end_time = time.time()
+        dif_time = end_time - start_time
+        diff_time.append(dif_time)
+    print(CRED + "End of building packages" + CEND)
+    return diff_time
+
+
+def copy(args):
+    print(CRED + "Deleting existing files" + CEND)
+    for fol in cpy_fold:
+        for pkg in args.packages:
+            for fl in glob.glob(fol + "*" + pkg + "*"):
+                os.remove(fl)
+    run(["repoctl", "update"])
+    run(["repoctl", "update", "-P", "overlay"])
+    print(CRED + "Copying files" + CEND)
+    for fol in pkg_fold:
+        for fl in glob.glob(fol + "*tar*"):
+            for dest in cpy_fold:
+                shutil.copy2(fl, dest)
+            shutil.copy2(fl, copy_dir + "store")
+    run(["repoctl", "update"])
+    run(["repoctl", "update", "-P", "overlay"])
+
+
+def main():
+    parser, args = parse_function()
+    nn = datetime.now()
+    now = nn.strftime("%Y-%m-%d %H:%M:%S")
+    with open(copy_dir + "pkg-stats", "a") as f:
+        print(f"\n{now}", file=f)
+    diff_time = build(args)
+    copy(args)
+    with open(copy_dir + "pkg-stats", "a") as f:
+        for p, t in zip(args.packages, diff_time):
+            print(f"{p} : {t:.1f}", file=f)
+
+
+if __name__ == "__main__":
+    main()
