@@ -3,23 +3,18 @@ local config = {
   -- Set colorscheme
   -- colorscheme = "default",
   plugins = {
-    init = {
-      { "catppuccin/nvim",
-        as = "catppuccin",
-        config = function()
-          require("catppuccin").setup({
+      {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        opts = {
             transparent_background = true,
-          })
-        end,
+            flavour = "mocha",
+        },
       },
-      { "ellisonleao/glow.nvim", as = "glow", config = function() require("glow").setup() end },
-    },
-  },
-  options = {
-    g = {
-      catppuccin_flavour = "mocha",
-    },
-  },
+      { 
+        "ellisonleao/glow.nvim", as = "glow", config = function() require("glow").setup() end },
+      },
+  -- Set colorscheme
   colorscheme = "catppuccin",
 }
 return config

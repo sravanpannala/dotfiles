@@ -11,7 +11,6 @@ fi
 # precmd_functions+=(set_win_title)
 # eval "$(oh-my-posh --init --shell zsh --config ~/stoys.omp.json)"
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
 
 ## Plugins section: Enable fish style features
 # Use syntax highlighting
@@ -194,3 +193,10 @@ if [[ -n "${key[Alt-Right]}" ]]; then
 	bindkey -M viins "${key[Alt-Right]}" forward-word
 	bindkey -M vicmd "${key[Alt-Right]}" forward-word
 fi
+
+
+function z () {
+    __zoxide_z "$@"
+}
+eval "$(zoxide init zsh --no-cmd)"
+
