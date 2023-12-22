@@ -2,7 +2,7 @@
 alias vi="nvim"
 alias ls='ls --color=auto'
 alias lsm='ls -l --block-size=M'
-alias exa='exa --icons'
+alias eza='eza --icons'
 alias nperm='stat -c "%a %n"'
 
 alias s="sudo "

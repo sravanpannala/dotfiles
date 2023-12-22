@@ -194,7 +194,7 @@ if [[ -n "${key[Alt-Right]}" ]]; then
 	bindkey -M vicmd "${key[Alt-Right]}" forward-word
 fi
 
-
+# zoxide bugfix temporary
 function z () {
     __zoxide_z "$@"
 }
