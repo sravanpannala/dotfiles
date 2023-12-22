@@ -1,20 +1,14 @@
-local config = {
-
+return {
   plugins = {
-      {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        opts = {
-            transparent_background = true,
-            flavour = "mocha",
-        },
-       priority = 1000,
-      },
-      { 
-        "ellisonleao/glow.nvim", config = true, cmd = "Glow"
-      },
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      opts = {
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        transparent_background = true,
+      }
+    },
   },
-  -- Set colorscheme
-  colorscheme = "catppuccin",
+  colorscheme = "catppuccin"
 }
-return config
+
