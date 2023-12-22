@@ -8,11 +8,12 @@ local config = {
             transparent_background = true,
             flavour = "mocha",
         },
+       priority = 1000,
       },
       { 
-        "ellisonleao/glow.nvim", as = "glow", config = function() require("glow").setup() end },
+        "ellisonleao/glow.nvim", config = true, cmd = "Glow"
       },
-
+  },
   -- Set colorscheme
   colorscheme = "catppuccin",
 }
