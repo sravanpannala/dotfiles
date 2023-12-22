@@ -1,7 +1,5 @@
 local config = {
 
-  -- Set colorscheme
-  -- colorscheme = "default",
   plugins = {
       {
         "catppuccin/nvim",
@@ -14,6 +12,7 @@ local config = {
       { 
         "ellisonleao/glow.nvim", as = "glow", config = function() require("glow").setup() end },
       },
+
   -- Set colorscheme
   colorscheme = "catppuccin",
 }
