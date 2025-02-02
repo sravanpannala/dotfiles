@@ -14,7 +14,7 @@ echo -e "$pkglist_aur" > pkglist_aur
 yay -S --noconfirm --needed paru
 
 case $yn in
-	y )	paru -S --noconfirm --needed - < pkglist_aur;;
+	y )	yay -S --noconfirm --needed - < pkglist_aur;;
 	* ) echo continue;;
 esac
 

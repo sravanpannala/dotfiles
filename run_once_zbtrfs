@@ -9,7 +9,7 @@ echo -e "$pkglist_btrfs" > pkglist_btrfs
 
 
 case $yn in
-	y )	paru -S --noconfirm --needed - < pkglist_btrfs;;
+	y ) yay -S --noconfirm --needed - < pkglist_btrfs;;
 	* ) echo continue;;
 esac
 
