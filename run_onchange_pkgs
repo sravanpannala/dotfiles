@@ -3,20 +3,19 @@
 read -p "If you want a full package install choose yes, choose no if you want a minimal, otherwise press enter.  (y/n) " yn
 
 pkglist_full="micro
-barrier
+input-leap
 btop
 man-db
 bat
 ncdu
 duf
 lazygit
-ranger
+lf
 ripgrep
 neovim
 xsel
 fd
-exa
-ncdu
+eza
 fzf
 iotop
 stress
@@ -44,20 +43,21 @@ stress
 "
 
 pkglist_min="micro
-barrier
+input-leap
 btop
 bat
 dua-cli
 duf
 fd
-exa
+eza
 lazygit
-ranger
+lf
 ripgrep
 neovim
 xsel
 fd
 zoxide
+macchina
 "
 
 echo -e "$pkglist_full" > pkglist_full

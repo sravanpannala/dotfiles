@@ -56,7 +56,7 @@ style = 'fg:bright-green'
 format = ' [$path]($style)[$read_only]($read_only_style) '
 
 [directory.substitutions]
-"Documents" = "󰈙"
+"Documents" = " "
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
@@ -74,7 +74,7 @@ format = '\[[$symbol$branch]($style)\]'
 format = '([\[$all_status$ahead_behind\]]($style))'
 
 [golang]
-symbol = ''
+symbol = 'ﳑ'
 format = '\[[$symbol($version)]($style)\]'
 
 [hostname]
@@ -92,7 +92,7 @@ disabled = false
 threshold = -1
 # format = "via $symbol [${ram_pct}]($style) "
 format = ' $symbol [$ram_pct( | $swap)]($style)'
-symbol = ""
+symbol = "󰍛"
 style = "yellow"
 
 [nodejs]
@@ -106,7 +106,7 @@ format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 format = '\[[$symbol($version)]($style)\]'
 
 [shell]
-fish_indicator = ""
+fish_indicator = "󰈺"
 powershell_indicator = "_"
 zsh_indicator = ""
 unknown_indicator = "mystery shell"
